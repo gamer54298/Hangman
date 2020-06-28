@@ -10,7 +10,7 @@ words=[
     "ready",
     "apple",
     "death",
-    "Five",
+    "five",
     "app",
     "seattle",
     "salty",
@@ -21,13 +21,13 @@ from random import randint
 word = words[randint(0, len(words) - 1)]
 print("Guess the word")
 print("Ready?")
-print (word) 
+#print (word) 
 guess = 7
 letters = {}
 
 fail = False
 while guess > 0:
-    print ("You have", guess, "chances left")
+    print ("You have", guess , "chances left")
     fail = False
     for c in word:
         if c in letters:
@@ -53,4 +53,8 @@ while guess > 0:
         print("That's not a letter")
 
 if fail: 
-    print("You've failed")
+    print(chr(27)+'[2j')
+    print('\033c')
+    print('\x1bc')
+    print("You've failed :(")
+    print("The word was", word + ".")
