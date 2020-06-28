@@ -1,0 +1,3 @@
+# Hangman
+
+Small hangman project
