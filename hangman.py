@@ -1,4 +1,6 @@
 from random import randint
+from readchar import readkey
+from readchar.key import CTRL_C
 
 
 def clear():
@@ -7,7 +9,7 @@ def clear():
 clear()
 print("Welcome to Hangman!")
 print("Press enter to play")
-input()
+readkey()
 
 clear()
 
@@ -40,27 +42,25 @@ while guess > 0:
             print("_", end="")
             fail = True
 
-    print ("")
+    print("")
     if not fail:
         clear()
         print("Congrates you win the game! The word was", word)
         print("Hit enter to exit hangman")
-        input()
+        readkey()
         exit()  
 
-    data = input()
-    if len(data) == 1:
-        if data in letters:
-            print("Already guessed that letter.")
-            guess = guess - 1
+    data = readkey()
+    if data == CTRL_C:
+        exit(0)
 
-        letters[data] = True
+    if data in letters:
+        print("Already guessed that letter.")
+        guess = guess - 1
 
-        if data not in word:
-            guess = guess - 1
+    letters[data] = True
 
-    else:
-        print("That's not a letter")
+    if data not in word:
         guess = guess - 1
 
 if fail:
