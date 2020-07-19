@@ -1,13 +1,15 @@
-print(chr(27)+'[2j')
-print('\033c')
-print('\x1bc')
+from random import randint
+
+
+def clear():
+    print("\x1bc")
+
+clear()
 print("Welcome to Hangman!")
 print("Press enter to play")
 input()
-print(chr(27)+'[2j')
-print('\033c')
-print('\x1bc')
 
+clear()
 
 words=[
     "ready",
@@ -20,11 +22,10 @@ words=[
     "nord", 
     "coffee"
 ]
-from random import randint
+
 word = words[randint(0, len(words) - 1)]
-print("Guess the word")
-print("Ready?")
-#print (word) 
+print("Guess the word\nReady?")
+
 guess = 7
 letters = {}
 
@@ -38,26 +39,31 @@ while guess > 0:
         else: 
             print("_", end="")
             fail = True
+
     print ("")
     if not fail:
-        print(chr(27)+'[2j')
-        print('\033c')
-        print('\x1bc') 
+        clear()
         print("Congrates you win the game! The word was", word)
         print("Hit enter to exit hangman")
         input()
         exit()  
 
-    data = input ()
-    guess = guess - 1
+    data = input()
     if len(data) == 1:
+        if data in letters:
+            print("Already guessed that letter.")
+            guess = guess - 1
+
         letters[data] = True
+
+        if data not in word:
+            guess = guess - 1
+
     else:
         print("That's not a letter")
+        guess = guess - 1
 
-if fail: 
-    print(chr(27)+'[2j')
-    print('\033c')
-    print('\x1bc')
+if fail:
+    clear()
     print("You've failed :(")
     print("The word was", word + ".")
